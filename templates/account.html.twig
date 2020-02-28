@@ -1,0 +1,41 @@
+{% extends'base.html.twig' %}
+{% block body %}
+    <div class="main">
+        <div class="create_task">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#helperNewTask">
+                Новое задание
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="helperNewTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Новое задание</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="{{ path('helper.task.create') }}" method="post">
+                            <div class="modal-body">
+                                <p><label for="title">Название</label>
+                                    <input type="text" name="title" id="helper_title" required /></p>
+                                <input type="hidden" name="token" value="{{ csrf_token('new-task') }}"/>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-info">Создать задание</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ul>
+{#    for список заданий    #}
+            <li>
+                <a href="{{ path('helper.task', {'id': '1'}) }}">Мои работы</a>
+            </li>
+        </ul>
+
+    </div>
+{% endblock %}

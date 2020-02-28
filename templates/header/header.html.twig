@@ -1,0 +1,51 @@
+<div class="header">
+    <div class="logo">
+        <a title="На главную" href="{{ path('helper.home') }}"><img src="/logo/logo.png" alt="logotype"></a>
+    </div>
+    {#  if авторизован ->  ссылка на личный кабинет else -> кнопка с выпадающ списком dropdown  #}
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Мой кабинет
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <!-- Button trigger modal Login -->
+            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#helperLogin">
+                Войти
+            </button>
+            <!-- Button trigger modal Register -->
+            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#helperRegister">
+                Зарегистрироваться
+            </button>
+        </div>
+    </div>
+    {% block login %}
+        {{ include('security/login.html.twig') }}
+    {% endblock %}
+    <!-- Modal -->
+    <div class="modal fade" id="helperRegister" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Регистрация</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ path('helper.register') }}" method="post">
+                    <div class="modal-body">
+                        <p><label for="helper_email">E-mail</label>
+                            <input type="email" name="email" id="helper_email" required /></p>
+                        <p><label for="helper_name">Имя</label>
+                            <input type="text" name="name" id="helper_name" required /></p>
+                        <p><label for="helper_password">Пароль</label>
+                            <input type="password" name="password" id="helper_password" required /></p>
+                        <input type="hidden" name="token" value="{{ csrf_token('potential-user') }}"/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-info">Зарегистрироваться</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
