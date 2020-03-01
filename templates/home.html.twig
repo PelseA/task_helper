@@ -7,6 +7,10 @@
         <p>auth ANONYMOUSLY</p>
     {% endif %}
 
+    {% if is_granted("ROLE_USER") %}
+        {{ app.user.username }}
+    {% endif %}
+
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <p>Email: {{ app.user.email }}</p>
     {% endif %}
